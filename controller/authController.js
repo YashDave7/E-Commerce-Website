@@ -1,7 +1,7 @@
 const userModel = require('../models/userModel');
+const comparePassword = require('../helpers/authHelper');
 const hashPassword = require('../helpers/authHelper');
 const JWT = require('jsonwebtoken');
-const comparePassword = require('../helpers/authHelper');
 
 
 // REGISTER CONTROLLER. 
@@ -15,6 +15,7 @@ const registerController = async (req, res) => {
                 error: 'All the fields are required'
              });
         }
+
 
         // CHECK USER.
         const existingUser = await userModel.findOne({ email })
@@ -52,8 +53,6 @@ const registerController = async (req, res) => {
 const loginController = async (req, res) => {
     try {
         const { email, password } = req.body;
-        console.log(req.body);
-        console.log("hello");
         // VALIDATION.
         if (!email || !password) {
             return res.status(404).send({ 
@@ -62,14 +61,14 @@ const loginController = async (req, res) => {
             });
         }
         // CHECK USER.
-        const user = userModel.findOne({ email });
+        const user = await userModel.findOne({ email });
         if (!user) {
             return res.status(404).send({
                 success: false,
                 message: 'Email not registered'
             })
         }
-        const match = comparePassword(password, user.password);
+        const match = await comparePassword(password, user.password);
         if (!match) {
             return res.status(200).send({
                 success: false,
@@ -94,4 +93,4 @@ const loginController = async (req, res) => {
     }
 }
 
-module.exports = registerController;
+module.exports = loginController, registerController;

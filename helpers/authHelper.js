@@ -3,18 +3,17 @@ const bcrypt = require('bcrypt');
 const hashPassword = async (password) => {
     try {
         const saltRounds = 10;
-        passwordInString = password.toString();
-        const hashedPassword = await bcrypt.hash(passwordInString, saltRounds);
-        return hashedPassword;
+        const hashed = bcrypt.hash(password, saltRounds);
+        return hashed;
     } catch (error) {
+        console.log(password);
         console.log("error in hashing the password");
         console.log(error);
     }
 }
 
 const comparePassword = async (password, hashedPassword) => {
-    return bcrypt.compare(password, hashPassword);
+    return bcrypt.compare(password, hashedPassword);
 }
 
-module.exports = hashPassword;
-module.exports = comparePassword;
+module.exports = comparePassword, hashPassword;

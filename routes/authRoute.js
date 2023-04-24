@@ -1,5 +1,5 @@
 const express = require('express');
-const registerController = require('../controller/authController');
+const registerController= require('../controller/authController');
 const loginController = require('../controller/authController')
 
 // ROUTER OBJECT.
