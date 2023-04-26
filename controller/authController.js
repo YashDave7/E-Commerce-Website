@@ -93,4 +93,9 @@ const loginController = async (req, res) => {
     }
 }
 
-module.exports = loginController, registerController;
+// test controller.
+const testController = (req, res) => {
+    res.send("protected route with Jwt");
+}
+
+module.exports = testController, loginController, registerController;

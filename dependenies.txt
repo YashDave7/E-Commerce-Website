@@ -1,4 +1,13 @@
+Server Side dependenies.
 mongoose
 dotenv
 express
 morgan
+bcrypt :- password hashing
+jsonwebtoken :- 
+
+Client Side dependenies.
+react
+react-helmet :- SEO
+react-icons :- icons
+react-router-dom :- setting routes
